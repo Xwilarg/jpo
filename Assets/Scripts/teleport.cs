@@ -19,5 +19,6 @@ public class teleport : MonoBehaviour
             if (controllerR != null)
                 controllerR.GetComponent<ControllerGrab>().drop();
         }
+        transform.parent.gameObject.SetActive(false);
     }
 }

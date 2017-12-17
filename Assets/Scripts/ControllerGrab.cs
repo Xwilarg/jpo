@@ -7,7 +7,9 @@ public class ControllerGrab : MonoBehaviour {
 
     private List<GameObject> grappable;
     private GameObject currGrab;
-    private Vector3 lastPos;
+    private Vector3 lastPos, newPos;
+
+    public GameObject portails;
 
     private void GrabObject(object sender, ClickedEventArgs e)
     {
@@ -27,18 +29,21 @@ public class ControllerGrab : MonoBehaviour {
         if (currGrab != null)
         {
             Rigidbody rb = currGrab.GetComponent<Rigidbody>();
-            rb.velocity = (transform.position - lastPos) * 10f;
+            rb.velocity = (newPos - lastPos) * 20f;
             drop();
         }
     }
 
     public void drop()
     {
-        Rigidbody rb = currGrab.GetComponent<Rigidbody>();
-        rb.useGravity = true;
-        rb.isKinematic = false;
-        currGrab.transform.parent = null;
-        currGrab = null;
+        if (currGrab != null)
+        {
+            Rigidbody rb = currGrab.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            currGrab.transform.parent = null;
+            currGrab = null;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,14 +58,21 @@ public class ControllerGrab : MonoBehaviour {
             grappable.Remove(other.gameObject);
     }
 
+    private void teleportRoom(object sender, ClickedEventArgs e)
+    {
+        portails.SetActive(true);
+    }
+
     private void Start ()
     {
         currGrab = null;
         lastPos = Vector3.zero;
+        newPos = Vector3.zero;
         grappable = new List<GameObject>();
         controller = GetComponent<SteamVR_TrackedController>();
         controller.TriggerClicked += GrabObject;
         controller.TriggerUnclicked += DropObject;
+        controller.PadClicked += teleportRoom;
 	}
 
 
@@ -68,7 +80,8 @@ public class ControllerGrab : MonoBehaviour {
     {
         if (currGrab != null)
         {
-            lastPos = transform.position;
+            lastPos = newPos;
+            newPos = transform.position;
         }
     }
 }
