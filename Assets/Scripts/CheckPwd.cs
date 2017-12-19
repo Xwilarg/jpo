@@ -4,11 +4,14 @@ public class CheckPwd : MonoBehaviour {
 
     private triggerButton.color[] pwd;
     private int indexPwd;
+    private int nbAttempt;
 
     public Material screenOk, screenFail;
     public MeshRenderer screen;
     
-	void Start () {
+	void Start ()
+    {
+        nbAttempt = 1;
         pwd = new triggerButton.color[4];
 	}
 
@@ -23,6 +26,11 @@ public class CheckPwd : MonoBehaviour {
                 && pwd[2] == triggerButton.color.BLUE
                 && pwd[3] == triggerButton.color.RED)
                 screen.material = screenOk;
+            else if (nbAttempt < 3)
+            {
+                nbAttempt++;
+                indexPwd = 0;
+            }
             else
                 screen.material = screenFail;
         }
