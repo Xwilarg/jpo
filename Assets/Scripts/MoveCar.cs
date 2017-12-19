@@ -3,6 +3,7 @@
 public class MoveCar : MonoBehaviour {
 
     private Rigidbody rb;
+    public GameObject portails;
 
     public float speed;
 
@@ -29,6 +30,8 @@ public class MoveCar : MonoBehaviour {
             speAxis += 1f;
         if (Input.GetKey(KeyCode.Space))
             upAxis += 1f;
+        if (Input.GetKey(KeyCode.E))
+            portails.SetActive(true);
         transform.Translate(Vector3.forward * speed * verAxis);
         // rb.velocity = new Vector3(0.0f, 0.0f, Mathf.Lerp(0, verAxis * speed, 0.8f));
         transform.Rotate(new Vector3(0.0f, Mathf.Lerp(0, horAxis * speed * 100f, 0.8f), Mathf.Lerp(0, speAxis * speed * 300f, 0.8f)));
