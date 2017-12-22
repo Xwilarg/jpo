@@ -18,6 +18,12 @@ public class teleport : MonoBehaviour
         cc.enabled = true;
     }
 
+    public void enable(GameObject destination)
+    {
+        newRoom = destination;
+        enable();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (newRoom != null && (other.name == "Camera (eye)" || other.name == "Controller (left)" || other.name == "Controller (right)"))
