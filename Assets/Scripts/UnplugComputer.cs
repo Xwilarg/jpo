@@ -3,19 +3,17 @@
 public class UnplugComputer : MonoBehaviour {
 
     private CheckPwd cpwd;
-    private Rigidbody rb;
     private bool startIn;
 
     private void Start()
     {
         startIn = false;
         cpwd = transform.parent.GetComponent<CheckPwd>();
-        rb = GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "PlugComputer")
+        if (other.name == "WireComputer")
         {
             if (!startIn)
             {
@@ -28,7 +26,7 @@ public class UnplugComputer : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "PlugComputer")
+        if (other.name == "WireComputer")
         {
             cpwd.switchOnOff(false);
         }

@@ -1,17 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
-public class CheckPwd : MonoBehaviour {
+public class CheckPwd : MonoBehaviour
+{
 
     private List<triggerColor.color> pwd;
     private int indexPwd;
 
     public Material screenOk, screenFail, screenOff, screenLog;
     public MeshRenderer screen;
+    public AudioSource source;
+    public VideoPlayer player;
 
     private bool isOn;
-    
-	void Start ()
+    private bool isLock;
+
+    void Start()
     {
         isOn = true;
         init();
@@ -19,8 +24,83 @@ public class CheckPwd : MonoBehaviour {
 
     private void init()
     {
+        isLock = true;
         pwd = new List<triggerColor.color>();
         indexPwd = 1;
+    }
+
+    public abstract class UsbKey
+    {
+        public UsbKey(Material image)
+        {
+            m_image = image;
+        }
+
+        public abstract void display(MeshRenderer ms, AudioSource source, VideoPlayer video);
+
+        protected Material m_image { private set; get; }
+    }
+
+    public class UsbMusic : UsbKey
+    {
+        public UsbMusic(Material image, AudioClip clip) : base(image)
+        {
+            m_clip = clip;
+        }
+
+        public override void display(MeshRenderer ms, AudioSource source, VideoPlayer video)
+        {
+            ms.material = m_image;
+            source.clip = m_clip;
+            source.Play();
+        }
+
+        private AudioClip m_clip;
+    }
+
+    public class UsbVideo : UsbKey
+    {
+        public UsbVideo(Material image, VideoClip clip) : base(image)
+        {
+            m_clip = clip;
+        }
+
+        public override void display(MeshRenderer ms, AudioSource source, VideoPlayer video)
+        {
+            video.clip = m_clip;
+            video.audioOutputMode = VideoAudioOutputMode.AudioSource;
+            video.SetTargetAudioSource(0, source);
+            video.source= VideoSource.VideoClip;
+            video.Play();
+        }
+
+        private VideoClip m_clip;
+    }
+
+    public void display(UsbKey usb)
+    {
+        if (!isLock)
+        {
+            stop();
+            usb.display(screen, source, player);
+        }
+    }
+
+    private void stop()
+    {
+        source.clip = null;
+        player.clip = null;
+        source.Stop();
+        player.Stop();
+    }
+
+    public void unDisplay()
+    {
+        if (!isLock)
+        {
+            stop();
+            screen.material = screenOk;
+        }
     }
 
     public void switchOnOff(bool value)
@@ -32,12 +112,15 @@ public class CheckPwd : MonoBehaviour {
             init();
         }
         else
+        {
             screen.material = screenOff;
+            stop();
+        }
     }
 
     public void increasePwd(triggerColor.color key)
     {
-        if (!isOn || indexPwd == 5) return;
+        if (!isOn || !isLock || indexPwd == 5) return;
         pwd.Add(key);
         if (indexPwd == 4)
         {
@@ -45,7 +128,10 @@ public class CheckPwd : MonoBehaviour {
                 && pwd[1] == triggerColor.color.PINK
                 && pwd[2] == triggerColor.color.BLUE
                 && pwd[3] == triggerColor.color.RED)
+            {
                 screen.material = screenOk;
+                isLock = false;
+            }
             else
                 screen.material = screenFail;
         }
