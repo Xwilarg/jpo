@@ -70,6 +70,7 @@ public class CheckPwd : MonoBehaviour
             video.clip = m_clip;
             video.audioOutputMode = VideoAudioOutputMode.AudioSource;
             video.SetTargetAudioSource(0, source);
+            video.EnableAudioTrack(0, true);
             video.source= VideoSource.VideoClip;
             video.Play();
         }
