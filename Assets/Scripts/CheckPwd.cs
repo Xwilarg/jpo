@@ -37,6 +37,7 @@ public class CheckPwd : MonoBehaviour
         }
 
         public abstract void display(MeshRenderer ms, AudioSource source, VideoPlayer video);
+        public abstract AudioClip GetAudioClip();
 
         protected Material m_image { private set; get; }
     }
@@ -53,6 +54,11 @@ public class CheckPwd : MonoBehaviour
             ms.material = m_image;
             source.clip = m_clip;
             source.Play();
+        }
+
+        public override AudioClip GetAudioClip()
+        {
+            return (m_clip);
         }
 
         private AudioClip m_clip;
@@ -73,6 +79,11 @@ public class CheckPwd : MonoBehaviour
             video.EnableAudioTrack(0, true);
             video.source= VideoSource.VideoClip;
             video.Play();
+        }
+
+        public override AudioClip GetAudioClip()
+        {
+            return (null);
         }
 
         private VideoClip m_clip;
@@ -128,13 +139,13 @@ public class CheckPwd : MonoBehaviour
 
             if (key == triggerColor.color.PINK)
             {
-                if (source.volume < 1)
-                    source.volume += 0.1f;
+                if (source.volume > 0)
+                    source.volume -= 0.1f;
             }
             else if (key == triggerColor.color.YELLOW)
             {
-                if (source.volume > 0)
-                    source.volume -= 0.1f;
+                if (source.volume < 0)
+                    source.volume += 0.1f;
             }
             else if (key == triggerColor.color.RED)
             {
