@@ -17,6 +17,12 @@ public class ControllerGrab : MonoBehaviour {
         {
             currGrab = grappable[0];
             Rigidbody rb = currGrab.GetComponent<Rigidbody>();
+            if (currGrab.name == "UsbKey" && rb == null)
+            {
+                currGrab.AddComponent<Rigidbody>();
+                rb = currGrab.GetComponent<Rigidbody>();
+                Debug.Log(rb);
+            }
             currGrab.transform.parent = transform;
             rb.isKinematic = true;
             rb.useGravity = false;
@@ -49,6 +55,7 @@ public class ControllerGrab : MonoBehaviour {
             rb.isKinematic = false;
             currGrab.transform.parent = null;
             currGrab = null;
+            grappable = new List<GameObject>();
         }
     }
 
