@@ -29,7 +29,7 @@ public class ControllerGrab : MonoBehaviour {
         if (currGrab != null)
         {
             Rigidbody rb = currGrab.GetComponent<Rigidbody>();
-            rb.velocity = (newPos - lastPos) * 20f;
+            rb.velocity = (newPos - lastPos) * 100f;
             drop();
         }
     }
