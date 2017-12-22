@@ -73,12 +73,9 @@ public class CheckPwd : MonoBehaviour
 
         public override void display(MeshRenderer ms, AudioSource source, VideoPlayer video)
         {
-            video.clip = m_clip;
-            video.audioOutputMode = VideoAudioOutputMode.AudioSource;
-            video.SetTargetAudioSource(0, source);
-            video.EnableAudioTrack(0, true);
-            video.source= VideoSource.VideoClip;
+            video.url = "Assets/Licence/" + m_clip.name + ".mp4";
             video.Play();
+            Debug.Log(video.audioTrackCount);
         }
 
         public override AudioClip GetAudioClip()
