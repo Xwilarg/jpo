@@ -14,7 +14,6 @@ public class PlayRadio : MonoBehaviour {
         if (other.name == "UsbKey")
         {
             source.clip = other.GetComponent<UsbContent>().key.GetAudioClip();
-            Debug.Log(source.clip);
             source.Play();
         }
     }
