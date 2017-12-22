@@ -27,7 +27,9 @@ public class teleport : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (newRoom != null && (other.name == "Camera (eye)" || other.name == "Controller (left)" || other.name == "Controller (right)"))
+        {
             GameObject.Find("[CameraRig]").transform.position = newRoom.transform.position;
+        }
         else
         {
             other.transform.position = newRoom.transform.position;
