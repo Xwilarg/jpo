@@ -4,7 +4,7 @@ public class triggerButton : MonoBehaviour {
 
     private const float trigger = -0.009f;
 
-    public BoxCollider bc;
+    private BoxCollider bc;
 
     public void Start()
     {

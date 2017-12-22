@@ -9,8 +9,6 @@ public class ControllerGrab : MonoBehaviour {
     private GameObject currGrab;
     private Vector3 lastPos, newPos;
 
-    public GameObject portails;
-
     private void GrabObject(object sender, ClickedEventArgs e)
     {
         if (grappable.Count > 0)
@@ -21,7 +19,6 @@ public class ControllerGrab : MonoBehaviour {
             {
                 currGrab.AddComponent<Rigidbody>();
                 rb = currGrab.GetComponent<Rigidbody>();
-                Debug.Log(rb);
             }
             currGrab.transform.parent = transform;
             rb.isKinematic = true;
@@ -71,11 +68,6 @@ public class ControllerGrab : MonoBehaviour {
             grappable.Remove(other.gameObject);
     }
 
-    private void teleportRoom(object sender, ClickedEventArgs e)
-    {
-        portails.SetActive(true);
-    }
-
     private void Start ()
     {
         currGrab = null;
@@ -85,7 +77,6 @@ public class ControllerGrab : MonoBehaviour {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.TriggerClicked += GrabObject;
         controller.TriggerUnclicked += DropObject;
-        controller.PadClicked += teleportRoom;
 	}
 
 

@@ -3,6 +3,20 @@
 public class teleport : MonoBehaviour
 {
     public GameObject newRoom;
+    private MeshRenderer mr;
+    private CapsuleCollider cc;
+
+    private void Start()
+    {
+        mr = GetComponent<MeshRenderer>();
+        cc = GetComponent<CapsuleCollider>();
+    }
+
+    public void enable()
+    {
+        mr.enabled = true;
+        cc.enabled = true;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +33,7 @@ public class teleport : MonoBehaviour
             if (controllerR != null)
                 controllerR.GetComponent<ControllerGrab>().drop();
         }
-        transform.parent.gameObject.SetActive(false);
+        mr.enabled = false;
+        cc.enabled = false;
     }
 }
