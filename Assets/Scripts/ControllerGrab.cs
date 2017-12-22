@@ -34,6 +34,12 @@ public class ControllerGrab : MonoBehaviour {
         }
     }
 
+    public string getObjName()
+    {
+        if (currGrab == null) return (null);
+        else return (currGrab.name);
+    }
+
     public void drop()
     {
         if (currGrab != null)

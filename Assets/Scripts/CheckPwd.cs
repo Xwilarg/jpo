@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CheckPwd : MonoBehaviour {
 
-    private triggerColor.color[] pwd;
+    private List<triggerColor.color> pwd;
     private int indexPwd;
     private int nbAttempt;
 
@@ -19,13 +20,14 @@ public class CheckPwd : MonoBehaviour {
 
     private void init()
     {
+        pwd = new List<triggerColor.color>();
         nbAttempt = 1;
-        pwd = new triggerColor.color[4];
+        indexPwd = 1;
     }
 
-    public void switchOnOff()
+    public void switchOnOff(bool value)
     {
-        isOn = !isOn;
+        isOn = value;
         if (isOn)
         {
             screen.material = screenLog;
@@ -38,9 +40,10 @@ public class CheckPwd : MonoBehaviour {
     public void increasePwd(triggerColor.color key)
     {
         if (!isOn || indexPwd == 5) return;
-        pwd[indexPwd] = key;
+        pwd.Add(key);
         if (indexPwd == 4)
         {
+            Debug.Log("AAA");
             if (pwd[0] == triggerColor.color.GREEN
                 && pwd[1] == triggerColor.color.PINK
                 && pwd[2] == triggerColor.color.BLUE
@@ -49,7 +52,8 @@ public class CheckPwd : MonoBehaviour {
             else if (nbAttempt < 3)
             {
                 nbAttempt++;
-                indexPwd = 0;
+                indexPwd = 1;
+                pwd = new List<triggerColor.color>();
             }
             else
                 screen.material = screenFail;
