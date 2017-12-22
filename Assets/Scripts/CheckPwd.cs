@@ -12,7 +12,7 @@ public class CheckPwd : MonoBehaviour
     public MeshRenderer screen;
     public AudioSource source;
     public VideoPlayer player;
-
+    
     private bool isOn;
     private bool isLock;
 
@@ -118,6 +118,65 @@ public class CheckPwd : MonoBehaviour
         }
     }
 
+    public void changeVideo(triggerColor.color key)
+    {
+        if (!isLock && player)
+        {
+            if (key == triggerColor.color.PINK)
+            {
+                if (source.volume < 1)
+                    source.volume += 0.1f;
+            }
+            else if (key == triggerColor.color.YELLOW)
+            {
+                if (source.volume > 0)
+                    source.volume -= 0.1f;
+            }
+            else if (key == triggerColor.color.RED)
+            {
+                if (player.isPlaying)
+                {
+                    player.Pause();
+                }
+                else
+                    player.Play();
+            }
+            else if (key == triggerColor.color.BLUE && player.isPlaying)
+                player.playbackSpeed -= 10f;
+            else if (key == triggerColor.color.GREY && player.isPlaying)
+                player.playbackSpeed += 10f;
+            else if (key == triggerColor.color.GREEN)
+            {
+                if (!source.mute)
+                    source.mute = true;
+                else
+                    source.mute = false;
+            }
+        }
+    }
+    public void changeVolume(triggerColor.color key)
+    {
+        if (!isLock && source)
+        {
+            if (key == triggerColor.color.PINK)
+            {
+                if (source.volume < 1)
+                    source.volume += 0.1f;
+            }
+            else if (key == triggerColor.color.YELLOW)
+            {
+                if (source.volume > 0)
+                    source.volume -= 0.1f;
+            }
+            else if (key == triggerColor.color.RED)
+            {
+                if (source.isPlaying)
+                    source.Pause();
+                else
+                    source.UnPause();
+            }
+        }
+    }
     public void increasePwd(triggerColor.color key)
     {
         if (!isOn || !isLock || indexPwd == 5) return;

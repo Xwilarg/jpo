@@ -17,5 +17,7 @@ public class triggerColor : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         transform.parent.GetComponent<CheckPwd>().increasePwd(myColor);
+        transform.parent.GetComponent<CheckPwd>().changeVolume(myColor);
+        transform.parent.GetComponent<CheckPwd>().changeVideo(myColor);
     }
 }
