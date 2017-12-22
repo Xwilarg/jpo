@@ -38,6 +38,7 @@ public class CheckPwd : MonoBehaviour
 
         public abstract void display(MeshRenderer ms, AudioSource source, VideoPlayer video);
         public abstract AudioClip GetAudioClip();
+        public abstract VideoClip GetVideoClip();
 
         protected Material m_image { private set; get; }
     }
@@ -61,6 +62,11 @@ public class CheckPwd : MonoBehaviour
             return (m_clip);
         }
 
+        public override VideoClip GetVideoClip()
+        {
+            return (null);
+        }
+
         private AudioClip m_clip;
     }
 
@@ -75,12 +81,16 @@ public class CheckPwd : MonoBehaviour
         {
             video.url = "Assets/Licence/" + m_clip.name + ".mp4";
             video.Play();
-            Debug.Log(video.audioTrackCount);
         }
 
         public override AudioClip GetAudioClip()
         {
             return (null);
+        }
+
+        public override VideoClip GetVideoClip()
+        {
+            return (m_clip);
         }
 
         private VideoClip m_clip;
