@@ -122,6 +122,9 @@ public class CheckPwd : MonoBehaviour
     {
         if (!isLock && player)
         {
+            float framerate = player.frameRate;
+            float tojump = framerate * 5;
+
             if (key == triggerColor.color.PINK)
             {
                 if (source.volume < 1)
@@ -141,10 +144,10 @@ public class CheckPwd : MonoBehaviour
                 else
                     player.Play();
             }
-            else if (key == triggerColor.color.BLUE && player.isPlaying)
-                player.playbackSpeed -= 10f;
-            else if (key == triggerColor.color.GREY && player.isPlaying)
-                player.playbackSpeed += 10f;
+            else if (key == triggerColor.color.BLUE && (player.frame - (long)tojump > 0))
+                player.frame -= (long)tojump;
+            else if (key == triggerColor.color.GREY && ((ulong)(player.frame + (long)tojump) < player.frameCount))
+                player.frame += (long)tojump;
             else if (key == triggerColor.color.GREEN)
             {
                 if (!source.mute)
@@ -158,12 +161,12 @@ public class CheckPwd : MonoBehaviour
     {
         if (!isLock && source)
         {
-            if (key == triggerColor.color.PINK)
+            if (key == triggerColor.color.YELLOW)
             {
                 if (source.volume < 1)
                     source.volume += 0.1f;
             }
-            else if (key == triggerColor.color.YELLOW)
+            else if (key == triggerColor.color.PINK)
             {
                 if (source.volume > 0)
                     source.volume -= 0.1f;
