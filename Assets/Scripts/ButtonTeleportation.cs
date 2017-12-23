@@ -8,4 +8,9 @@ public class ButtonTeleportation : MonoBehaviour {
     {
         portal.enable();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        OnTriggerEnter(collision.collider);
+    }
 }

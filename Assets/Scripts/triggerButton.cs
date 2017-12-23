@@ -26,4 +26,14 @@ public class triggerButton : MonoBehaviour {
         transform.position = newPos;
         bc.size = new Vector3(1f, 1f, 1f);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        OnTriggerEnter(collision.collider);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        OnTriggerExit(collision.collider);
+    }
 }
