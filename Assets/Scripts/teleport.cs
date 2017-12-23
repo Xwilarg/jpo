@@ -5,6 +5,7 @@ public class teleport : MonoBehaviour
     public GameObject newRoom;
     private MeshRenderer mr;
     private CapsuleCollider cc;
+    public MeshRenderer textBitcoin;
 
     private void Start()
     {
@@ -29,6 +30,10 @@ public class teleport : MonoBehaviour
         if (newRoom != null && (other.name == "Camera (eye)" || other.name == "Controller (left)" || other.name == "Controller (right)"))
         {
             GameObject.Find("[CameraRig]").transform.position = newRoom.transform.position;
+            if (newRoom.name == "Blockchain")
+                textBitcoin.enabled = true;
+            else
+                textBitcoin.enabled = false;
         }
         else
         {
