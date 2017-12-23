@@ -53,6 +53,11 @@ public class ControllerGrab : MonoBehaviour {
         }
     }
 
+    public Vector3 getVelocity()
+    {
+        return ((newPos - lastPos) * 100f);
+    }
+
     public string getObjName()
     {
         if (currGrab == null) return (null);
