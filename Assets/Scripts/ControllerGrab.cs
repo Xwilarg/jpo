@@ -20,6 +20,10 @@ public class ControllerGrab : MonoBehaviour {
                 currGrab.AddComponent<Rigidbody>();
                 rb = currGrab.GetComponent<Rigidbody>();
             }
+            else if (currGrab.name == "Flamethrower")
+            {
+                currGrab.GetComponent<ParticleSystem>().Play();
+            }
             currGrab.transform.parent = transform;
             rb.isKinematic = true;
             rb.useGravity = false;
@@ -50,6 +54,10 @@ public class ControllerGrab : MonoBehaviour {
             Rigidbody rb = currGrab.GetComponent<Rigidbody>();
             rb.useGravity = true;
             rb.isKinematic = false;
+            if (currGrab.name == "Flamethrower")
+            {
+                currGrab.GetComponent<ParticleSystem>().Stop();
+            }
             currGrab.transform.parent = null;
             currGrab = null;
             grappable = new List<GameObject>();
