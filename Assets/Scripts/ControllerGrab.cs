@@ -24,6 +24,16 @@ public class ControllerGrab : MonoBehaviour {
             {
                 currGrab.GetComponent<ParticleSystem>().Play();
             }
+            else if (currGrab.name == "Phaser")
+            {
+                currGrab.GetComponent<Taser>().enabled = true;
+                currGrab.GetComponent<LineRenderer>().enabled = true;
+            }
+            else if (currGrab.name == "Phaser2")
+            {
+                currGrab.GetComponent<TaserCloser>().enabled = true;
+                currGrab.GetComponent<LineRenderer>().enabled = true;
+            }
             currGrab.transform.parent = transform;
             rb.isKinematic = true;
             rb.useGravity = false;
@@ -57,6 +67,18 @@ public class ControllerGrab : MonoBehaviour {
             if (currGrab.name == "Flamethrower")
             {
                 currGrab.GetComponent<ParticleSystem>().Stop();
+            }
+            else if (currGrab.name == "Phaser")
+            {
+                currGrab.GetComponent<Taser>().enabled = false;
+                currGrab.GetComponent<LineRenderer>().enabled = false;
+            }
+            else if (currGrab.name == "Phaser2")
+            {
+                TaserCloser tc = currGrab.GetComponent<TaserCloser>();
+                tc.stop();
+                tc.enabled = false;
+                currGrab.GetComponent<LineRenderer>().enabled = false;
             }
             currGrab.transform.parent = null;
             currGrab = null;
