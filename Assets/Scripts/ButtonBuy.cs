@@ -1,0 +1,11 @@
+﻿using UnityEngine;
+
+public class ButtonBuy : MonoBehaviour {
+
+    public ManageBitcoins mbt;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        mbt.buy();
+    }
+}
