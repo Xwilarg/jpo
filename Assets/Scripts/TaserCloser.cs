@@ -5,7 +5,7 @@ public class TaserCloser : MonoBehaviour {
     
     private LineRenderer lr;
     private List<GameObject> attracting;
-    private const float speed = 0.5f;
+    private const float speed = 0.2f;
 
     private void Start()
     {
@@ -27,6 +27,13 @@ public class TaserCloser : MonoBehaviour {
                 }
             }
         }
+        attracting.RemoveAll(x => x == true);
+    }
+
+    public void drop(GameObject obj)
+    {
+        if (attracting != null)
+            attracting.Remove(obj);
     }
 
     void Update()

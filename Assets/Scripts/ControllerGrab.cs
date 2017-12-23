@@ -8,12 +8,14 @@ public class ControllerGrab : MonoBehaviour {
     private List<GameObject> grappable;
     private GameObject currGrab;
     private Vector3 lastPos, newPos;
+    public TaserCloser taserCloser;
 
     private void GrabObject(object sender, ClickedEventArgs e)
     {
         if (grappable.Count > 0)
         {
             currGrab = grappable[0];
+            taserCloser.drop(currGrab);
             Rigidbody rb = currGrab.GetComponent<Rigidbody>();
             if (currGrab.name == "UsbKey" && rb == null)
             {
