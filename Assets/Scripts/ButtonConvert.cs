@@ -4,11 +4,12 @@ public class ButtonConvert : MonoBehaviour {
 
     public ManageBitcoins mbt;
 
-    private void OnCollisionEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.name != "Camera (eye)" && other.name != "Controller (left)" && other.name != "Controller (right)")
+        if (other.gameObject.name != "Camera (eye)" && other.gameObject.name != "Controller (left)" && other.gameObject.name != "Controller (right)")
         {
-            mbt.convert(name.Length * 100);
+            valueObject value = other.gameObject.GetComponent<valueObject>();
+            mbt.convert((value != null) ? (value.value) : (0));
             Destroy(other.gameObject);
         }
     }

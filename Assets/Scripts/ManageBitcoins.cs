@@ -20,13 +20,13 @@ public class ManageBitcoins : MonoBehaviour
 
     public void buy()
     {
-        nbBitcoins = nbEuros / bitcoinValue;
+        nbBitcoins += nbEuros / bitcoinValue;
         nbEuros = 0f;
     }
 
     public void sell()
     {
-        nbEuros = nbBitcoins * bitcoinValue;
+        nbEuros += nbBitcoins * bitcoinValue;
         nbBitcoins = 0f;
     }
 
@@ -41,13 +41,15 @@ public class ManageBitcoins : MonoBehaviour
             counter -= Time.deltaTime;
         else
         {
+            float oldValue = bitcoinValue;
             bitcoinValue += UnityEngine.Random.Range(-200f, 1000f);
             if (bitcoinValue < 0f)
                 bitcoinValue = 0f;
+            nbBitcoins = bitcoinValue * nbBitcoins / oldValue;
             counter = UnityEngine.Random.Range(0.1f, 1f);
         }
-        tm.text = "Bitcoin value: " + bitcoinValue.ToString("000000.0000") + " euros" + Environment.NewLine + Environment.NewLine +
-                  "You have:      " + nbEuros.ToString("000000.0000") + " bitcoins" + Environment.NewLine + Environment.NewLine +
-                  "You have:      " + nbBitcoins.ToString("000000.0000") + " euros" + Environment.NewLine + Environment.NewLine;
+        tm.text = "Bitcoin value: " + bitcoinValue.ToString("000000.000000") + " euros" + Environment.NewLine + Environment.NewLine +
+                  "You have:      " + nbBitcoins.ToString("000000.000000") + " bitcoins" + Environment.NewLine + Environment.NewLine +
+                  "You have:      " + nbEuros.ToString("000000.000000") + " euros" + Environment.NewLine + Environment.NewLine;
     }
 }
