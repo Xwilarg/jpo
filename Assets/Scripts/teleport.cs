@@ -27,6 +27,16 @@ public class teleport : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject radio = GameObject.Find("Radio");
+        if (other.gameObject.name == "UsbKey")
+        {
+            GameObject[] Incollision = other.GetComponents<GameObject>();
+            foreach (GameObject c in Incollision)
+            {
+                if (c == radio)
+                    other = radio.GetComponent<Collider>();
+            }
+        }
         if (newRoom != null && (other.name == "Camera (eye)" || other.name == "Controller (left)" || other.name == "Controller (right)"))
         {
             GameObject.Find("[CameraRig]").transform.position = newRoom.transform.position;
