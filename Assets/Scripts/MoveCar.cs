@@ -18,7 +18,10 @@ public class MoveCar : MonoBehaviour {
         {
             isEnable = !isEnable;
             if (isEnable)
+            {
                 rb.useGravity = false;
+                transform.rotation = Quaternion.Euler(new Vector3(0.0f, transform.rotation.eulerAngles.y, 0.0f));
+            }
             else
                 rb.useGravity = true;
         }
