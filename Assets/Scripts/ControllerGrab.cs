@@ -36,6 +36,10 @@ public class ControllerGrab : MonoBehaviour {
                 currGrab.GetComponent<TaserCloser>().enabled = true;
                 currGrab.GetComponent<LineRenderer>().enabled = true;
             }
+            else if (currGrab.name == "UFO")
+            {
+                currGrab.GetComponent<MoveCar>().isEnable = false;
+            }
             currGrab.transform.parent = transform;
             rb.isKinematic = true;
             rb.useGravity = false;

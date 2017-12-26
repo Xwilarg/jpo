@@ -3,38 +3,44 @@
 public class MoveCar : MonoBehaviour {
 
     private Rigidbody rb;
-    public GameObject portails;
+    public bool isEnable { set; private get; }
 
     public float speed;
 
 	void Start () {
         rb = GetComponent<Rigidbody>();
+        isEnable = false;
 	}
 	
-	void Update () {
-        float horAxis = 0.0f;
-        float verAxis = 0.0f;
-        float speAxis = 0.0f;
-        float upAxis = 0.0f;
-        if (Input.GetKey(KeyCode.Z))
-            verAxis += 1f;
-        else if (Input.GetKey(KeyCode.S))
-            verAxis += -1f;
-        if (Input.GetKey(KeyCode.Q))
-            horAxis += -1f;
-        else if (Input.GetKey(KeyCode.D))
-            horAxis += 1f;
-        if (Input.GetKey(KeyCode.Keypad4))
-            speAxis += -1f;
-        else if (Input.GetKey(KeyCode.Keypad6))
-            speAxis += 1f;
-        if (Input.GetKey(KeyCode.Space))
-            upAxis += 1f;
-        if (Input.GetKey(KeyCode.E))
-            portails.SetActive(true);
-        transform.Translate(Vector3.forward * speed * verAxis);
-        // rb.velocity = new Vector3(0.0f, 0.0f, Mathf.Lerp(0, verAxis * speed, 0.8f));
-        transform.Rotate(new Vector3(0.0f, Mathf.Lerp(0, horAxis * speed * 100f, 0.8f), Mathf.Lerp(0, speAxis * speed * 300f, 0.8f)));
-        rb.AddForce(new Vector3(0.0f, upAxis * speed * 10f, 0.0f), ForceMode.Impulse);
+	void Update ()
+    {
+        if (Input.GetButtonDown("Engine Start/Stop") && transform.parent.name != "Controller (right)" && transform.parent.name != "Controller (left)")
+        {
+            isEnable = !isEnable;
+            if (isEnable)
+                rb.useGravity = false;
+            else
+                rb.useGravity = true;
+        }
+        if (isEnable)
+        {
+            int forAxis = 0;
+            int verAxis = 0;
+            int horAxis = 0;
+            if (Input.GetButton("Forward"))
+                forAxis = 1;
+            else if (Input.GetButton("Backward"))
+                forAxis = -1;
+            if (Input.GetButton("Up"))
+                verAxis = 1;
+            else if (Input.GetButton("Down"))
+                verAxis = -1;
+            if (Input.GetButton("Right"))
+                horAxis = 1;
+            else if (Input.GetButton("Left"))
+                horAxis = -1;
+            rb.velocity = new Vector3(Mathf.Lerp(0, forAxis * speed, 0.8f), Mathf.Lerp(0, verAxis * speed, 0.8f), Mathf.Lerp(0, -horAxis * speed, 0.8f));
+            transform.Rotate(new Vector3(0.0f, Input.GetAxis("Mouse X"), 0.0f));
+        }
     }
 }
