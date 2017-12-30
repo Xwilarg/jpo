@@ -70,7 +70,7 @@ public class SteamVR_TestTrackedCamera : MonoBehaviour
 			material.mainTextureScale = new Vector2(1, -1);
 		}
 
-		target.localScale = new Vector3(1, 1.0f / aspect, 1);
+		/*target.localScale = new Vector3(1, 1.0f / aspect, 1);
 
 		// Apply the pose that this frame was recorded at.
 		if (source.hasTracking)
@@ -78,7 +78,7 @@ public class SteamVR_TestTrackedCamera : MonoBehaviour
 			var t = source.transform;
 			target.localPosition = t.pos;
 			target.localRotation = t.rot;
-		}
+		}*/
 	}
 }
 
