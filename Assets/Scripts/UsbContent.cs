@@ -24,6 +24,8 @@ public class UsbContent : MonoBehaviour {
             key = new CheckPwd.UsbMusic(mat, clip);
         else if (type == UsbType.UsbVideo)
             key = new CheckPwd.UsbVideo(mat, video);
+        else if (type == UsbType.UsbText)
+            key = new CheckPwd.UsbText(text);
         else
             throw new ArgumentException("type doesn't have a valid value.");
 	}

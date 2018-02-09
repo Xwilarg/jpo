@@ -12,6 +12,8 @@ public class CheckPwd : MonoBehaviour
     public MeshRenderer screen;
     public AudioSource source;
     public VideoPlayer player;
+
+    private static Material failScreen;
     
     private bool isOn;
     private bool isLock;
@@ -19,6 +21,7 @@ public class CheckPwd : MonoBehaviour
     void Start()
     {
         isOn = true;
+        failScreen = screenFail;
         init();
     }
 
@@ -68,6 +71,31 @@ public class CheckPwd : MonoBehaviour
         }
 
         private AudioClip m_clip;
+    }
+
+    public class UsbText : UsbKey
+    {
+        public UsbText(string pwd) : base(failScreen)
+        {
+            this.pwd = pwd;
+        }
+
+        public override void display(MeshRenderer ms, AudioSource source, VideoPlayer video)
+        {
+            ms.material = m_image;
+        }
+
+        public override AudioClip GetAudioClip()
+        {
+            return (null);
+        }
+
+        public override VideoClip GetVideoClip()
+        {
+            return (null);
+        }
+
+        string pwd;
     }
 
     public class UsbVideo : UsbKey
