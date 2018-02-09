@@ -8,7 +8,8 @@ public class UsbContent : MonoBehaviour {
     public enum UsbType
     {
         UsbAudio,
-        UsbVideo
+        UsbVideo,
+        UsbText
     }
 
     public CheckPwd.UsbKey key { private set; get; }
@@ -16,6 +17,7 @@ public class UsbContent : MonoBehaviour {
     public AudioClip clip;
     public Material mat;
     public VideoClip video;
+    public string text;
 
     void Start () {
         if (type == UsbType.UsbAudio)
