@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ManageBitcoins : MonoBehaviour
 {
-
+    // SEE TELEPORT.CS TO ENABLE
     private TextMesh tm;
     private float nbEuros, nbBitcoins;
     private float bitcoinValue;

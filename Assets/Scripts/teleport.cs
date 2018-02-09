@@ -33,7 +33,7 @@ public class teleport : MonoBehaviour
         if (newRoom != null && (other.name == "Camera (eye)" || other.name == "Controller (left)" || other.name == "Controller (right)"))
         {
             GameObject.Find("[CameraRig]").transform.position = newRoom.transform.position;
-            if (newRoom.name == "Blockchain")
+            if (newRoom.name == "Placard")
                 textBitcoin.enabled = true;
             else
                 textBitcoin.enabled = false;
