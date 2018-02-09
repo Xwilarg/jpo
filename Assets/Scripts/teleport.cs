@@ -7,6 +7,7 @@ public class teleport : MonoBehaviour
     private CapsuleCollider cc;
     public MeshRenderer textBitcoin;
     private GameObject radio;
+    public GameObject portalgenerator;
 
     private void Start()
     {
@@ -56,5 +57,6 @@ public class teleport : MonoBehaviour
         }
         mr.enabled = false;
         cc.enabled = false;
+        portalgenerator.GetComponent<ButtonDisparition>().resetPos();
     }
 }
