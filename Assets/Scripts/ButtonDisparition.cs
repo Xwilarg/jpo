@@ -11,7 +11,8 @@ public class ButtonDisparition : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         velocity = Vector3.zero;
-        transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+        dest = transform;
+        dest.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
 	}
 	
 	// Update is called once per frame
