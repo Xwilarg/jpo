@@ -58,5 +58,6 @@ public class teleport : MonoBehaviour
         mr.enabled = false;
         cc.enabled = false;
         portalgenerator.GetComponent<ButtonDisparition>().resetPos();
+        portalgenerator.GetComponent<ButtonDisparition>().StopgoDown();
     }
 }
