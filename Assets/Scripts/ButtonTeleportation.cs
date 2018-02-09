@@ -4,6 +4,11 @@ public class ButtonTeleportation : MonoBehaviour {
 
     public teleport portal;
 
+    private void Start()
+    {
+        portal.portalgenerator = transform.parent.gameObject;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         portal.enable();

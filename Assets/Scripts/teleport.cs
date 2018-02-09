@@ -7,7 +7,8 @@ public class teleport : MonoBehaviour
     private CapsuleCollider cc;
     public MeshRenderer textBitcoin;
     private GameObject radio;
-    public GameObject portalgenerator;
+    public GameObject portalgenerator { set; private get; }
+    public GameObject PortailGeneratorGo;
 
     private void Start()
     {
@@ -57,7 +58,9 @@ public class teleport : MonoBehaviour
         }
         mr.enabled = false;
         cc.enabled = false;
-        portalgenerator.GetComponent<ButtonDisparition>().resetPos();
-        portalgenerator.GetComponent<ButtonDisparition>().StopgoDown();
+        foreach (ButtonDisparition bd in PortailGeneratorGo.GetComponentsInChildren<ButtonDisparition>())
+        {
+            bd.resetPos();
+        }
     }
 }
