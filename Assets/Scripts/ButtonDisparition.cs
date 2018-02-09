@@ -25,5 +25,6 @@ public class ButtonDisparition : MonoBehaviour {
     public void resetPos()
     {
         transform.position = iniPos;
+        doesGoDown = false;
     }
 }
