@@ -40,19 +40,12 @@ public class teleport : MonoBehaviour
         }
         else
         {
-            if (other.gameObject.name == "UsbKey")
+            GameObject toTp = other.gameObject;
+            while (toTp.transform.parent.GetComponent<valueObject>() != null || toTp.transform.parent.name == "RadioInput")
             {
-                GameObject go = other.GetComponents<GameObject>().ToList().Find(x => x == radio);
-                /*
-                 ArgumentException: GetComponent requires that the requested component 'GameObject' derives from MonoBehaviour or Component or is an interface.
-                 UnityEngine.GameObject.GetComponents[GameObject] () (at C:/buildslave/unity/build/artifacts/generated/common/runtime/GameObjectBindings.gen.cs:101)
-                 UnityEngine.Component.GetComponents[GameObject] () (at C:/buildslave/unity/build/artifacts/generated/common/runtime/ComponentBindings.gen.cs:185)
-                 teleport.OnTriggerEnter (UnityEngine.Collider other) (at Assets/Scripts/teleport.cs:45)
-                */
-                if (go != null)
-                    other = radio.GetComponent<Collider>();
+                toTp = toTp.transform.parent.gameObject;
             }
-            other.transform.position = newRoom.transform.position;
+            toTp.transform.position = newRoom.transform.position;
             GameObject controllerL = GameObject.Find("Controller (left)");
             GameObject controllerR = GameObject.Find("Controller (right)");
             if (controllerL != null)
