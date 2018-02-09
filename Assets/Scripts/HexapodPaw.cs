@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 
 public class HexapodPaw : MonoBehaviour {
-    
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
+
+    private void Update()
+    {
+        transform.Rotate(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
+    }
 }
