@@ -52,6 +52,8 @@ public class teleport : MonoBehaviour
                 if (go != null)
                     other = radio.GetComponent<Collider>();
             }
+            if (other.gameObject.name == "PortalGenerator")
+                return;
             other.transform.position = newRoom.transform.position;
             GameObject controllerL = GameObject.Find("Controller (left)");
             GameObject controllerR = GameObject.Find("Controller (right)");
