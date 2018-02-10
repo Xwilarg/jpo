@@ -8,4 +8,9 @@ public class ButtonBuy : MonoBehaviour {
     {
         mbt.buy();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        OnTriggerEnter(collision.collider);
+    }
 }

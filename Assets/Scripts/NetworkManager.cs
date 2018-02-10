@@ -8,10 +8,11 @@ public class NetworkManager : MonoBehaviour
 {
 
     private TcpListener server;
-    private TcpClient client = new TcpClient();
+    private TcpClient client;
 
     private void Start()
     {
+        client = null;
         const int port = 7777;
         server = new TcpListener(IPAddress.Any, port);
         server.Start();
@@ -28,6 +29,8 @@ public class NetworkManager : MonoBehaviour
 
     private void Update()
     {
+        if (client == null)
+            return;
         try
         {
             NetworkStream s = client.GetStream();
@@ -42,6 +45,8 @@ public class NetworkManager : MonoBehaviour
                         sendDatas("PING");
                     else if (datas == "PINGREG")
                         sendDatas("PINGREG");
+                    else if (datas == "CHECK")
+                        sendDatas("OK");
                 }
             }
         }
