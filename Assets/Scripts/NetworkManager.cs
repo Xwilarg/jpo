@@ -21,10 +21,13 @@ public class NetworkManager : MonoBehaviour
 
     public void sendDatas(string data)
     {
-        NetworkStream s = client.GetStream();
-        StreamWriter sw = new StreamWriter(s);
-        sw.WriteLine("JPO" + data);
-        sw.Flush();
+        if (client != null)
+        {
+            NetworkStream s = client.GetStream();
+            StreamWriter sw = new StreamWriter(s);
+            sw.WriteLine("JPO" + data);
+            sw.Flush();
+        }
     }
 
     private void Update()

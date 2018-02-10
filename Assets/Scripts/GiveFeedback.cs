@@ -15,6 +15,11 @@ public class GiveFeedback : MonoBehaviour {
     {
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<NetworkManager>()
             .sendDatas("FEED" + (int)lvl);
+        foreach (Transform t in transform.parent.GetComponentsInChildren<Transform>())
+        {
+            if (t.name != "Feedback")
+                Destroy(t.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
